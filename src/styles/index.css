@@ -18,6 +18,7 @@
   }
 
   .container-custom {
-    @apply max-w-7xl mx-auto;
+    /* Use more of the screen on large displays while staying centered */
+    @apply w-full max-w-[100rem] mx-auto;
   }
 }
