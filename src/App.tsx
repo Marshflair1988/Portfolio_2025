@@ -1,30 +1,29 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
+import Home from './components/Home';
+import ProjectDetail from './components/ProjectDetail';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <footer className="bg-black border-t border-gray-800 text-gray-400 py-8">
-        <div className="container-custom text-center">
-          <p>
-            © {new Date().getFullYear()} Portfolio. Built with React,
-            TypeScript, and TailwindCSS.
-          </p>
-        </div>
-      </footer>
-    </div>
+    <Router>
+      <div className="min-h-screen">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/project/:id" element={<ProjectDetail />} />
+          </Routes>
+        </main>
+        <footer className="bg-black border-t border-gray-800 text-gray-400 py-8">
+          <div className="container-custom text-center">
+            <p>
+              © {new Date().getFullYear()} Portfolio. Built with React,
+              TypeScript, and TailwindCSS.
+            </p>
+          </div>
+        </footer>
+      </div>
+    </Router>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 
@@ -13,6 +14,7 @@ const navLinks = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +26,15 @@ const Header = () => {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // If we're on the home page, use smooth scroll
+    if (location.pathname === '/') {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If we're on a different page, navigate to home with hash
+      window.location.href = `/${href}`;
     }
   };
 
@@ -43,17 +51,22 @@ const Header = () => {
       <nav className="container-custom px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('#home');
-            }}
-            className="text-[2.16rem] font-bold text-white hover:text-accent-400 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}>
-            Portfolio
-          </motion.a>
+          <Link to="/">
+            <motion.div
+              onClick={() => {
+                if (location.pathname === '/') {
+                  const element = document.querySelector('#home');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
+              className="text-[2.16rem] font-bold text-white hover:text-accent-400 transition-colors cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}>
+              Portfolio
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center space-x-8">

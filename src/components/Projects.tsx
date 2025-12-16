@@ -1,8 +1,20 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { HiExternalLink, HiCode } from 'react-icons/hi';
 import { projects } from '../data/projects';
 
 const Projects = () => {
+  const navigate = useNavigate();
+
+  const handleProjectClick = (projectId: number, e: React.MouseEvent) => {
+    // Don't navigate if clicking on buttons
+    const target = e.target as HTMLElement;
+    if (target.closest('a') || target.closest('button')) {
+      return;
+    }
+    navigate(`/project/${projectId}`);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -53,10 +65,11 @@ const Projects = () => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-black/50 border border-gray-700 hover:border-accent-500/50 transition-all duration-300 group"
+              onClick={(e) => handleProjectClick(project.id, e)}
+              className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-black/50 border border-gray-700 hover:border-accent-500/50 transition-all duration-300 group cursor-pointer"
               whileHover={{ y: -8 }}>
               {/* Project Image */}
-              <div className="relative overflow-hidden h-48 bg-gray-200">
+              <div className="relative overflow-hidden h-[17.6rem] md:h-[22rem] lg:h-[26.4rem] bg-gray-200">
                 <img
                   src={project.image}
                   alt={project.title}
