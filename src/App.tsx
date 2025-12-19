@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import ProjectDetail from './components/ProjectDetail';
 import ScrollToTop from './components/ScrollToTop';
@@ -16,14 +17,7 @@ function App() {
             <Route path="/project/:id" element={<ProjectDetail />} />
           </Routes>
         </main>
-        <footer className="bg-black border-t border-gray-800 text-gray-400 py-8">
-          <div className="container-custom text-center">
-            <p>
-              © {new Date().getFullYear()} Portfolio. Built with React,
-              TypeScript, and TailwindCSS.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );

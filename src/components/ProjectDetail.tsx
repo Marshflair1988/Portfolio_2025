@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiArrowLeft, HiExternalLink, HiChevronDown } from 'react-icons/hi';
+import {
+  HiArrowLeft,
+  HiExternalLink,
+  HiChevronDown,
+  HiClipboard,
+} from 'react-icons/hi';
 import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/projects';
 
@@ -14,8 +19,19 @@ const ProjectDetail = () => {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState<string>('');
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const project = projects.find((p) => p.id === Number(id));
+
+  const copyProjectLink = () => {
+    const url = project?.liveUrl || window.location.href;
+    if (url) {
+      navigator.clipboard.writeText(url).then(() => {
+        setLinkCopied(true);
+        setTimeout(() => setLinkCopied(false), 2000);
+      });
+    }
+  };
 
   useEffect(() => {
     if (project) {
@@ -250,9 +266,20 @@ const ProjectDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {project.title}
-          </h1>
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white flex-1">
+              {project.title}
+            </h1>
+            <motion.button
+              onClick={copyProjectLink}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-gray-300 border border-gray-700 rounded-lg hover:bg-gray-700 hover:border-gray-600 transition-colors text-sm font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title="Copy project link">
+              <HiClipboard className="w-4 h-4" />
+              {linkCopied ? 'Copied!' : 'Copy Link'}
+            </motion.button>
+          </div>
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
@@ -271,31 +298,40 @@ const ProjectDetail = () => {
           transition={{ delay: 0.2 }}
           className="mb-16 max-w-[96.39rem] mx-auto">
           <div className="grid grid-cols-5 gap-3">
-            {galleryImages.slice(0, 5).map((image, index) => (
-              <motion.button
-                key={index}
-                onClick={() => {
-                  setSelectedImage(image);
-                  setModalImage(image);
-                  setIsModalOpen(true);
-                }}
-                className={`relative overflow-hidden rounded-xl border-2 transition-all ${
-                  selectedImage === image
-                    ? 'border-accent-500 ring-2 ring-accent-500/50'
-                    : 'border-gray-700 hover:border-gray-600'
-                } bg-gray-800 shadow-xl`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}>
-                <img
-                  src={image}
-                  alt={`${project.title} - View ${index + 1}`}
-                  className="w-full aspect-[5/4] object-cover"
-                />
-                {selectedImage === image && (
-                  <div className="absolute inset-0 bg-accent-500/20" />
-                )}
-              </motion.button>
-            ))}
+            {galleryImages.slice(0, 5).map((image, index) => {
+              const caption =
+                project.galleryCaptions?.[index] ||
+                `${project.title} - View ${index + 1}`;
+              return (
+                <div key={index} className="flex flex-col">
+                  <motion.button
+                    onClick={() => {
+                      setSelectedImage(image);
+                      setModalImage(image);
+                      setIsModalOpen(true);
+                    }}
+                    className={`relative overflow-hidden rounded-xl border-2 transition-all ${
+                      selectedImage === image
+                        ? 'border-accent-500 ring-2 ring-accent-500/50'
+                        : 'border-gray-700 hover:border-gray-600'
+                    } bg-gray-800 shadow-xl`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}>
+                    <img
+                      src={image}
+                      alt={caption}
+                      className="w-full aspect-[5/4] object-cover"
+                    />
+                    {selectedImage === image && (
+                      <div className="absolute inset-0 bg-accent-500/20" />
+                    )}
+                  </motion.button>
+                  <p className="text-xs text-gray-400 mt-2 text-center">
+                    {caption}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </motion.div>
 

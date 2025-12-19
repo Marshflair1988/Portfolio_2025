@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiMail, HiPaperAirplane } from 'react-icons/hi';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 import { personalInfo } from '../data/personal';
 
 const Contact = () => {
@@ -10,13 +11,68 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder for form submission
-    console.log('Form submitted:', formData);
-    alert("Thank you for your message! I'll get back to you soon.");
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // EmailJS configuration - uses environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+    try {
+      if (serviceId === 'YOUR_SERVICE_ID' || templateId === 'YOUR_TEMPLATE_ID' || publicKey === 'YOUR_PUBLIC_KEY') {
+        throw new Error('EmailJS not configured. Please set up environment variables.');
+      }
+
+      // Send email - template variables must match your EmailJS template
+      // Make sure your EmailJS template uses: {{from_name}}, {{from_email}}, {{message}}
+      // IMPORTANT: Set the recipient email (marshwoolgar@gmail.com) in your EmailJS template settings
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          reply_to: formData.email, // Allows you to reply directly
+          to_email: 'marshwoolgar@gmail.com', // Add recipient in template params too
+        },
+        publicKey // Public key as 4th parameter
+      );
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error: any) {
+      console.error('Email sending failed:', error);
+      // EmailJS error structure: error.text contains the error message
+      const errorMessage = error?.text || error?.message || 'Failed to send email. Please check your EmailJS configuration.';
+      console.error('Error details:', {
+        serviceId,
+        templateId,
+        publicKeyLength: publicKey.length,
+        errorText: errorMessage,
+        status: error?.status || 'Unknown',
+        fullError: error,
+      });
+      
+      // Show more helpful error message
+      if (errorMessage.includes('recipients address is empty')) {
+        alert(`Email failed to send: ${errorMessage}\n\nSOLUTION: Go to your EmailJS dashboard → Templates → Edit template_le22egb → Set "To Email" field to: marshwoolgar@gmail.com`);
+      } else {
+        alert(`Email failed to send: ${errorMessage}\n\nPlease check:\n1. EmailJS template has recipient email set (marshwoolgar@gmail.com)\n2. Template variables match: {{from_name}}, {{from_email}}, {{message}}\n3. Service ID and Template ID are correct`);
+      }
+      
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -116,12 +172,30 @@ const Contact = () => {
 
                 <motion.button
                   type="submit"
-                  className="w-full px-6 py-3 bg-accent-600 text-white rounded-lg font-semibold hover:bg-accent-500 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-accent-600/30"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}>
-                  Send Message
-                  <HiPaperAirplane className="w-5 h-5" />
+                  disabled={isSubmitting}
+                  className={`w-full px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 shadow-lg ${
+                    submitStatus === 'success'
+                      ? 'bg-green-600 hover:bg-green-500 text-white'
+                      : submitStatus === 'error'
+                      ? 'bg-red-600 hover:bg-red-500 text-white'
+                      : 'bg-accent-600 hover:bg-accent-500 text-white'
+                  } ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}>
+                  {isSubmitting
+                    ? 'Sending...'
+                    : submitStatus === 'success'
+                    ? 'Message Sent!'
+                    : submitStatus === 'error'
+                    ? 'Error - Try Again'
+                    : 'Send Message'}
+                  <HiPaperAirplane className={`w-5 h-5 ${isSubmitting ? 'animate-pulse' : ''}`} />
                 </motion.button>
+                {submitStatus === 'error' && (
+                  <p className="text-sm text-red-400 text-center mt-2">
+                    Failed to send message. Please try again or email directly.
+                  </p>
+                )}
               </div>
             </form>
           </motion.div>

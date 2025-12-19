@@ -21,6 +21,7 @@ export interface Project {
   detailedDescription?: string;
   image: string;
   gallery?: string[];
+  galleryCaptions?: string[];
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
@@ -96,6 +97,13 @@ All code adheres to professional standards including consistent 2-space indentat
       ecommerceContact,
       ecommerceEarrings,
     ],
+    galleryCaptions: [
+      'E-Commerce Store Homepage',
+      'Shopping Cart with Items',
+      'Order Success Confirmation',
+      'Contact Form',
+      'Product Detail Page',
+    ],
     tags: ['React', 'TypeScript', 'API'],
     liveUrl: 'https://ecommercestore-jsframeworksassignment.netlify.app/',
     githubUrl: 'https://github.com/Marshflair1988/ecommerce-store',
@@ -104,7 +112,7 @@ All code adheres to professional standards including consistent 2-space indentat
     id: 2,
     title: 'Holidaze',
     description:
-      'Holidaze is a full-featured accommodation booking platform built as a modern single-page application (SPA) that connects travelers with unique venues. This project demonstrates advanced front-end development skills, complex state management, and seamless API integration.',
+      'A full-featured accommodation booking platform connecting travelers with unique venues. Built with React and TypeScript.',
     detailedDescription: `Project Purpose
 
 The application serves two distinct user types: customers seeking accommodations and venue managers managing their properties. Customers can browse venues, search by location and dates, view detailed property information, and make bookings. Venue managers have a comprehensive dashboard to create, edit, and delete their venues, manage bookings, and track their business.
@@ -170,6 +178,13 @@ This project showcases proficiency in building production-ready React applicatio
       holidazeHomepageFooter,
       holidazeConfirmBooking,
       holidazeBookingConfirmed,
+    ],
+    galleryCaptions: [
+      'Holidaze Homepage',
+      'User Booking Dashboard',
+      'Homepage Footer Section',
+      'Confirm Booking Modal',
+      'Booking Confirmation Page',
     ],
     tags: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'API'],
     liveUrl: 'https://holidazeprojectexam2.netlify.app/',
@@ -246,6 +261,13 @@ This project demonstrates proficiency in modern web development, responsive desi
       socialImage,
       socialnavigation,
     ],
+    galleryCaptions: [
+      'Trending Posts Section',
+      'Image Container with Posts',
+      'User Profile Page',
+      'Social Feed Main View',
+      'Navigation Menu',
+    ],
     tags: ['HTML5', 'TailwindCSS'],
     liveUrl: 'https://cssframeworksmarsh.netlify.app/profile/',
     githubUrl: 'https://github.com/Marshflair1988/CSSframeworksCS',
@@ -255,8 +277,7 @@ This project demonstrates proficiency in modern web development, responsive desi
     title: 'Coming Soon',
     description:
       'This project is under development and will be available to view soon',
-    detailedDescription:
-      'Description coming soon',
+    detailedDescription: 'Description coming soon',
     image:
       'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     gallery: [
