@@ -14,8 +14,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center section-padding pt-40 md:pt-32 pb-16 bg-gradient-to-br from-black via-gray-900 to-black">
-      <div className="h-32 md:hidden"></div>
+      className="min-h-screen flex items-center justify-center section-padding pt-32 pb-16 bg-gradient-to-br from-black via-gray-900 to-black">
       <div className="container-custom">
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-12 items-center">
           {/* Text Content */}
