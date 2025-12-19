@@ -1,0 +1,37 @@
+feat: update project descriptions and improve formatting consistency
+
+- Update project descriptions with comprehensive details
+  - Add detailed E-Commerce Store description with technical implementation details
+  - Add detailed Holidaze description with project purpose and technical highlights
+  - Update Social Connect description formatting
+  - Ensure all descriptions follow consistent structure with proper sections
+
+- Fix project description formatting
+  - Add proper line breaks between all major sections in E-Commerce description
+  - Add proper line breaks between all major sections in Holidaze description
+  - Ensure consistent formatting across all project descriptions
+  - All sections now properly separated for collapsible dropdown functionality
+
+- Update image imports to use organized folder structure
+  - Organize E-Commerce images into ecommerce/ folder
+  - Organize Holidaze images into holidaze/ folder
+  - Organize Social Connect images into socialconnect/ folder
+  - Update all gallery arrays to use proper image imports
+  - Add new gallery images for E-Commerce (shopping cart, order success, contact, earrings)
+  - Add new gallery images for Holidaze (user booking, confirm booking, booking confirmed, homepage footer)
+
+- Enhance collapsible sections functionality
+  - Add support for new section headings: Project Purpose, Key Features & Technical Highlights, Technical Architecture, Technical Challenges Solved, Project Impact
+  - Ensure all major headings are recognized and render as collapsible dropdowns
+  - Sections from "Key Features & Technical Highlights" onwards appear in right column dropdowns
+
+- Fix GitHub icon consistency
+  - Replace HiCode icon with FaGithub icon in Projects.tsx component
+  - Ensure GitHub buttons use consistent GitHub logo across all components
+  - Match icon styling with ProjectDetail component
+
+- Improve code organization and maintainability
+  - Ensure all imports use correct paths
+  - Verify component structure consistency
+  - Maintain proper TypeScript typing throughout
+

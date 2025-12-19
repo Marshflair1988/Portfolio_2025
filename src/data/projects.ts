@@ -1,9 +1,18 @@
-import ecommerceImage from '../Assets/images/ecommerce.png';
-import holidazeImage from '../Assets/images/holidaze.png';
-import socialImage from '../Assets/images/social.png';
-import socialimagecontainer from '../Assets/images/socialimagecontainer.png';
-import socialstrendingcontainer from '../Assets/images/socialstrendingcontainer.png';
-import socialprofile from '../Assets/images/socialprofile.png';
+import ecommerceImage from '../Assets/images/ecommerce/ecommerce.png';
+import ecommerceShoppingCart from '../Assets/images/ecommerce/shoppingcart.png';
+import ecommerceOrderSuccessful from '../Assets/images/ecommerce/ordersuccesful.png';
+import ecommerceContact from '../Assets/images/ecommerce/contact.png';
+import ecommerceEarrings from '../Assets/images/ecommerce/ecommerce-earrings.png';
+import holidazeImage from '../Assets/images/holidaze/holidaze.png';
+import holidazeHomepageFooter from '../Assets/images/holidaze/homepagefooter.png';
+import holidazeConfirmBooking from '../Assets/images/holidaze/confirmbooking.png';
+import holidazeBookingConfirmed from '../Assets/images/holidaze/bookingconfirmed.png';
+import holidazeUserBooking from '../Assets/images/holidaze/userbooking.png';
+import socialImage from '../Assets/images/socialconnect/social.png';
+import socialimagecontainer from '../Assets/images/socialconnect/socialimagecontainer.png';
+import socialstrendingcontainer from '../Assets/images/socialconnect/socialstrendingcontainer.png';
+import socialprofile from '../Assets/images/socialconnect/socialprofile.png';
+import socialnavigation from '../Assets/images/socialconnect/socialnavigation.png';
 
 export interface Project {
   id: number;
@@ -22,16 +31,70 @@ export const projects: Project[] = [
     id: 1,
     title: 'E-Commerce Store',
     description:
-      'A full-stack e-commerce solution with user authentication, product management, and payment integration.',
-    detailedDescription:
-      'This comprehensive e-commerce platform provides a seamless shopping experience with advanced features including user authentication, secure payment processing, and an intuitive admin dashboard. Built with modern technologies, it offers real-time inventory management, order tracking, and a responsive design that works across all devices. The platform includes features like product search and filtering, shopping cart functionality, wishlist management, and customer reviews.',
+      'A full-stack e-commerce solution with user authentication, product management, and the roadmap to payment integration.',
+    detailedDescription: `This e-commerce application is a full-featured online shopping platform built from the ground up using modern React and TypeScript. The project demonstrates advanced frontend development skills, including state management, API integration, responsive design, and comprehensive testing practices.
+
+Project Overview
+
+The application provides a complete shopping experience with a product catalog, detailed product pages, shopping cart functionality, and a streamlined checkout process. Built with React 19 and TypeScript, the project showcases professional-grade code organization, type safety, and user experience design.
+
+Key Features
+Product Management
+Dynamic product catalog with image galleries, pricing, and ratings
+Detailed product pages featuring reviews, tags, and comprehensive product information
+Real-time search functionality with instant filtering
+Advanced sorting capabilities (by name and price, ascending/descending)
+
+Shopping Cart
+Persistent cart state management using React Context API
+Add, remove, and update item quantities
+Real-time cart total calculations with support for discounted pricing
+Visual cart icon with item count indicator
+
+User Experience
+Fully responsive design optimized for mobile, tablet, and desktop
+Custom toast notification system for user feedback
+Smooth page transitions and loading states
+Contact form with comprehensive client-side validation
+Checkout success confirmation page
+
+Technical Implementation
+Architecture & State Management
+The application uses React Context API with useReducer for centralized state management. The cart state is managed through a reducer pattern, ensuring predictable state updates and maintaining data consistency across components. A custom toast notification system provides user feedback for all cart operations and form submissions.
+
+Type Safety
+Full TypeScript implementation with comprehensive type definitions for all data structures, API responses, component props, and context values. This ensures compile-time error detection and improves code maintainability and developer experience.
+
+Styling & Design
+Styled-components provide component-scoped CSS-in-JS styling, enabling dynamic theming and responsive design patterns. The application follows a mobile-first approach with breakpoints optimized for various screen sizes.
+
+API Integration
+RESTful API integration with the Noroff Online Shop API, featuring robust error handling, loading states, and type-safe data fetching. All API responses are fully typed, ensuring data integrity throughout the application.
+
+Testing
+Comprehensive test suite with 91% pass rate using Jest and React Testing Library. Tests cover component rendering, user interactions, context functionality, form validation, and routing behavior. Custom mocks and test utilities ensure reliable and maintainable test coverage.
+
+Technologies & Tools
+Frontend Framework: React 19.1.1
+Language: TypeScript 4.9.5
+Styling: Styled-components 6.1.19
+Routing: React Router DOM 7.8.2
+State Management: React Context API with useReducer
+Testing: Jest, React Testing Library, @testing-library/user-event
+Build Tool: Create React App
+Code Quality: ESLint, Prettier
+API: Noroff Online Shop REST API
+
+Development Highlights
+The project demonstrates proficiency in modern React patterns including custom hooks, context providers, and component composition. Code follows strict TypeScript conventions with explicit interfaces, avoiding any types, and comprehensive type coverage. The application architecture emphasizes separation of concerns with organized component, context, and page structures.
+All code adheres to professional standards including consistent 2-space indentation, semantic HTML, accessibility considerations, and clean code principles. The project showcases the ability to build production-ready applications with attention to user experience, code quality, and maintainability.`,
     image: ecommerceImage,
     gallery: [
       ecommerceImage,
-      ecommerceImage,
-      ecommerceImage,
-      ecommerceImage,
-      ecommerceImage,
+      ecommerceShoppingCart,
+      ecommerceOrderSuccessful,
+      ecommerceContact,
+      ecommerceEarrings,
     ],
     tags: ['React', 'TypeScript', 'API'],
     liveUrl: 'https://ecommercestore-jsframeworksassignment.netlify.app/',
@@ -41,16 +104,72 @@ export const projects: Project[] = [
     id: 2,
     title: 'Holidaze',
     description:
-      'A collaborative task management application with real-time updates and team collaboration features.',
-    detailedDescription:
-      'A powerful task management application designed for teams to collaborate effectively. Features include real-time updates, drag-and-drop task organization, priority settings, deadline tracking, and team member assignments. The app supports multiple project boards, task filtering and sorting, comment threads, file attachments, and progress visualization. Built with a focus on user experience and productivity.',
+      'Holidaze is a full-featured accommodation booking platform built as a modern single-page application (SPA) that connects travelers with unique venues. This project demonstrates advanced front-end development skills, complex state management, and seamless API integration.',
+    detailedDescription: `Project Purpose
+
+The application serves two distinct user types: customers seeking accommodations and venue managers managing their properties. Customers can browse venues, search by location and dates, view detailed property information, and make bookings. Venue managers have a comprehensive dashboard to create, edit, and delete their venues, manage bookings, and track their business.
+
+Key Features & Technical Highlights
+User Experience
+Intelligent Search System: Home page search bar with city and date filtering that redirects to filtered venue listings
+Real-time Availability: Dynamic calendar integration that automatically excludes booked dates and prevents double-booking
+Responsive Design: Fully responsive UI built with Tailwind CSS, ensuring optimal experience across all devices
+Modal-based Interactions: Seamless user flows through modals for bookings, profile updates, and venue management
+
+Customer Features
+Complete booking lifecycle: create, view, edit, and cancel bookings
+Profile management with avatar updates via image URL integration
+Upcoming bookings dashboard with automatic filtering of past dates
+Advanced venue filtering by location, price, guest capacity, and amenities
+
+Venue Manager Features
+Comprehensive venue management: create, edit, and delete properties
+Booking management dashboard showing all upcoming bookings across owned venues
+Profile customization with avatar and banner updates
+Account deletion functionality with proper data cleanup
+
+Technical Architecture
+Built with a modern tech stack emphasizing type safety, performance, and developer experience:
+React 18.2.0 with TypeScript for robust, type-safe component architecture
+Vite 5.0.8 for lightning-fast development and optimized production builds
+React Router DOM 6.20.0 for client-side routing with protected routes
+Tailwind CSS 3.4.0 for utility-first styling with custom design system
+React DatePicker for intuitive date selection with custom validation
+
+Technical Challenges Solved
+API Integration Complexity
+Implemented comprehensive REST API client with proper error handling and token management
+Built pagination system to fetch all venues across multiple API pages
+Created flexible API service layer supporting multiple endpoints with consistent error handling
+Implemented Bearer token authentication with localStorage persistence
+
+State Management & Data Flow
+Managed complex state for bookings, venues, and user profiles across multiple components
+Implemented real-time calendar updates when bookings are created or modified
+Built filtering and search functionality that maintains state through URL parameters
+Created seamless data synchronization between venue details and booking calendars
+
+User Experience Optimization
+Developed date picker validation that prevents booking conflicts
+Implemented automatic filtering to show only future bookings
+Built responsive modal system for various user interactions
+Created intuitive navigation flows between search, browsing, and booking
+
+Development Practices
+TypeScript: Full type safety throughout the application with strict TypeScript configuration
+ESLint: Code quality enforcement with TypeScript-specific linting rules
+Performance: Optimized builds with Vite and Lighthouse validation for accessibility and performance
+Code Organization: Modular component structure with separation of concerns (pages, components, services)
+
+Project Impact
+This project showcases proficiency in building production-ready React applications with complex business logic, real-time data synchronization, and intuitive user interfaces. It demonstrates the ability to work with external APIs, implement authentication flows, manage application state effectively, and create polished user experiences that handle edge cases gracefully.`,
     image: holidazeImage,
     gallery: [
       holidazeImage,
-      holidazeImage,
-      holidazeImage,
-      holidazeImage,
-      holidazeImage,
+      holidazeUserBooking,
+      holidazeHomepageFooter,
+      holidazeConfirmBooking,
+      holidazeBookingConfirmed,
     ],
     tags: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'API'],
     liveUrl: 'https://holidazeprojectexam2.netlify.app/',
@@ -125,7 +244,7 @@ This project demonstrates proficiency in modern web development, responsive desi
       socialimagecontainer,
       socialprofile,
       socialImage,
-      socialImage,
+      socialnavigation,
     ],
     tags: ['HTML5', 'TailwindCSS'],
     liveUrl: 'https://cssframeworksmarsh.netlify.app/profile/',

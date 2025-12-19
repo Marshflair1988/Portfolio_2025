@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { HiExternalLink, HiCode } from 'react-icons/hi';
+import { HiExternalLink } from 'react-icons/hi';
+import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/projects';
 
 const Projects = () => {
@@ -120,7 +121,7 @@ const Projects = () => {
                       className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-gray-200 rounded-lg font-medium hover:bg-gray-600 transition-colors"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}>
-                      <HiCode className="w-4 h-4" />
+                      <FaGithub className="w-4 h-4" />
                       GitHub
                     </motion.a>
                   )}

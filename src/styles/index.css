@@ -25,7 +25,8 @@
 
 @layer components {
   .project-description {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      sans-serif;
     line-height: 1.9;
     color: rgb(229, 231, 235);
     white-space: pre-line;

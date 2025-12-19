@@ -12,6 +12,8 @@ const ProjectDetail = () => {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set()
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState<string>('');
 
   const project = projects.find((p) => p.id === Number(id));
 
@@ -22,6 +24,18 @@ const ProjectDetail = () => {
       setSelectedImage(firstImage);
     }
   }, [project]);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isModalOpen]);
 
   if (!project) {
     return (
@@ -67,12 +81,17 @@ const ProjectDetail = () => {
     const lines = text.split('\n');
     const majorHeadings = [
       'Project Overview',
+      'Project Purpose',
       'Key Features',
+      'Key Features & Technical Highlights',
       'Technical Implementation',
+      'Technical Architecture',
+      'Technical Challenges Solved',
       'Development Practices',
       'Design Decisions',
       'Challenges & Solutions',
       'Project Highlights',
+      'Project Impact',
     ];
 
     for (let i = 0; i < lines.length; i++) {
@@ -104,12 +123,17 @@ const ProjectDetail = () => {
 
     const majorHeadings = [
       'Project Overview',
+      'Project Purpose',
       'Key Features',
+      'Key Features & Technical Highlights',
       'Technical Implementation',
+      'Technical Architecture',
+      'Technical Challenges Solved',
       'Development Practices',
       'Design Decisions',
       'Challenges & Solutions',
       'Project Highlights',
+      'Project Impact',
     ];
 
     let firstHeadingIndex = -1;
@@ -245,41 +269,33 @@ const ProjectDetail = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-16 max-w-[37.8rem] mx-auto">
-          <div className="flex gap-3">
-            {/* Large Image Container */}
-            <div className="flex-1 rounded-xl overflow-hidden bg-gray-800 border border-gray-700 shadow-2xl">
-              <img
-                src={selectedImage}
-                alt={project.title}
-                className="w-full aspect-[5/4] object-cover"
-              />
-            </div>
-
-            {/* Thumbnail Gallery - Vertical */}
-            <div className="flex flex-col gap-2">
-              {galleryImages.slice(0, 4).map((image, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setSelectedImage(image)}
-                  className={`relative overflow-hidden rounded-lg border-2 transition-all w-20 h-20 flex-shrink-0 ${
-                    selectedImage === image
-                      ? 'border-accent-500 ring-2 ring-accent-500/50'
-                      : 'border-gray-700 hover:border-gray-600'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}>
-                  <img
-                    src={image}
-                    alt={`${project.title} - View ${index + 1}`}
-                    className="w-full h-full aspect-[5/4] object-cover"
-                  />
-                  {selectedImage === image && (
-                    <div className="absolute inset-0 bg-accent-500/20" />
-                  )}
-                </motion.button>
-              ))}
-            </div>
+          className="mb-16 max-w-[96.39rem] mx-auto">
+          <div className="grid grid-cols-5 gap-3">
+            {galleryImages.slice(0, 5).map((image, index) => (
+              <motion.button
+                key={index}
+                onClick={() => {
+                  setSelectedImage(image);
+                  setModalImage(image);
+                  setIsModalOpen(true);
+                }}
+                className={`relative overflow-hidden rounded-xl border-2 transition-all ${
+                  selectedImage === image
+                    ? 'border-accent-500 ring-2 ring-accent-500/50'
+                    : 'border-gray-700 hover:border-gray-600'
+                } bg-gray-800 shadow-xl`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}>
+                <img
+                  src={image}
+                  alt={`${project.title} - View ${index + 1}`}
+                  className="w-full aspect-[5/4] object-cover"
+                />
+                {selectedImage === image && (
+                  <div className="absolute inset-0 bg-accent-500/20" />
+                )}
+              </motion.button>
+            ))}
           </div>
         </motion.div>
 
@@ -356,6 +372,33 @@ const ProjectDetail = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative inline-block max-h-[90vh] max-w-[90vw]">
+              {/* Full Size Image */}
+              <img
+                src={modalImage}
+                alt={project.title}
+                className="max-h-[90vh] max-w-[90vw] h-auto w-auto object-contain rounded-lg"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
