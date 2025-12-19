@@ -254,20 +254,20 @@ This project demonstrates proficiency in modern web development, responsive desi
     id: 4,
     title: 'Coming Soon',
     description:
-      'Analytics dashboard for tracking social media performance with detailed insights and reports.',
+      'This project is under development and will be available to view soon',
     detailedDescription:
-      'A comprehensive analytics dashboard for tracking and analyzing social media performance across multiple platforms. Features include engagement metrics, follower growth tracking, content performance analysis, best posting times, audience demographics, and detailed reporting. The dashboard provides actionable insights to help optimize social media strategy and improve engagement rates.',
+      'Description coming soon',
     image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     gallery: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1636654129379-e7ae6f30bfd0?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ],
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'D3.js'],
     liveUrl: '#',
-    githubUrl: '#',
+    githubUrl: 'https://www.github.com',
   },
 ];
