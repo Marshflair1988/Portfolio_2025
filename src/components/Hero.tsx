@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { HiArrowDown, HiDownload } from 'react-icons/hi';
+import { HiArrowDown } from 'react-icons/hi';
 import { personalInfo } from '../data/personal';
 import profileImage from '../Assets/images/Me.jpg';
 
@@ -9,11 +9,6 @@ const Hero = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const downloadResume = () => {
-    // Placeholder for resume download
-    window.open('#', '_blank');
   };
 
   return (
@@ -64,14 +59,6 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}>
                 View Projects
                 <HiArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-              </motion.button>
-              <motion.button
-                onClick={downloadResume}
-                className="px-8 py-4 bg-transparent text-accent-400 border-2 border-accent-500 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}>
-                Download Resume
-                <HiDownload className="w-5 h-5" />
               </motion.button>
             </motion.div>
           </motion.div>

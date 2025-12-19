@@ -69,7 +69,7 @@ const Projects = () => {
               className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-black/50 border border-gray-700 hover:border-accent-500/50 transition-all duration-300 group cursor-pointer"
               whileHover={{ y: -8 }}>
               {/* Project Image */}
-              <div className="relative overflow-hidden h-[17.6rem] md:h-[22rem] lg:h-[26.4rem] bg-gray-200">
+              <div className="relative overflow-hidden aspect-[5/4] bg-gray-200">
                 <img
                   src={project.image}
                   alt={project.title}
