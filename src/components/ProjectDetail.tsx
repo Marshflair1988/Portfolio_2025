@@ -23,13 +23,30 @@ const ProjectDetail = () => {
 
   const project = projects.find((p) => p.id === Number(id));
 
-  const copyProjectLink = () => {
+  const copyProjectLink = async () => {
     const url = project?.liveUrl || window.location.href;
-    if (url) {
-      navigator.clipboard.writeText(url).then(() => {
+    if (url && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(url);
         setLinkCopied(true);
         setTimeout(() => setLinkCopied(false), 2000);
-      });
+      } catch (error) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          setLinkCopied(true);
+          setTimeout(() => setLinkCopied(false), 2000);
+        } catch {
+          // Silent fail - user can manually copy
+        }
+        document.body.removeChild(textArea);
+      }
     }
   };
 
@@ -43,9 +60,12 @@ const ProjectDetail = () => {
 
   // Handle ESC key to close modal
   useEffect(() => {
+    if (!isModalOpen) return;
+
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isModalOpen) {
+      if (e.key === 'Escape') {
         setIsModalOpen(false);
+        setModalImage('');
       }
     };
 
@@ -70,13 +90,7 @@ const ProjectDetail = () => {
     );
   }
 
-  const galleryImages = project.gallery || [
-    project.image,
-    project.image,
-    project.image,
-    project.image,
-    project.image,
-  ];
+  const galleryImages = project.gallery || [project.image];
 
   // Toggle section expansion
   const toggleSection = (sectionName: string) => {
@@ -297,8 +311,8 @@ const ProjectDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="mb-16 max-w-[96.39rem] mx-auto">
-          <div className="grid grid-cols-5 gap-3">
-            {galleryImages.slice(0, 5).map((image, index) => {
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {galleryImages.map((image, index) => {
               const caption =
                 project.galleryCaptions?.[index] ||
                 `${project.title} - View ${index + 1}`;
@@ -310,6 +324,7 @@ const ProjectDetail = () => {
                       setModalImage(image);
                       setIsModalOpen(true);
                     }}
+                    aria-label={`View ${caption} in full size`}
                     className={`relative overflow-hidden rounded-xl border-2 transition-all ${
                       selectedImage === image
                         ? 'border-accent-500 ring-2 ring-accent-500/50'
@@ -321,6 +336,7 @@ const ProjectDetail = () => {
                       src={image}
                       alt={caption}
                       className="w-full aspect-[5/4] object-cover"
+                      loading="lazy"
                     />
                     {selectedImage === image && (
                       <div className="absolute inset-0 bg-accent-500/20" />
@@ -416,8 +432,12 @@ const ProjectDetail = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsModalOpen(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
+            onClick={() => {
+              setIsModalOpen(false);
+              setModalImage('');
+            }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            aria-label="Close image modal">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -428,8 +448,9 @@ const ProjectDetail = () => {
               {/* Full Size Image */}
               <img
                 src={modalImage}
-                alt={project.title}
+                alt={`${project.title} - Full size view`}
                 className="max-h-[90vh] max-w-[90vw] h-auto w-auto object-contain rounded-lg"
+                loading="eager"
               />
             </motion.div>
           </motion.div>

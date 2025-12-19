@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { HiMail, HiPaperAirplane } from 'react-icons/hi';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
@@ -48,26 +48,8 @@ const Contact = () => {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setSubmitStatus('idle'), 5000);
-    } catch (error: any) {
-      console.error('Email sending failed:', error);
-      // EmailJS error structure: error.text contains the error message
-      const errorMessage = error?.text || error?.message || 'Failed to send email. Please check your EmailJS configuration.';
-      console.error('Error details:', {
-        serviceId,
-        templateId,
-        publicKeyLength: publicKey.length,
-        errorText: errorMessage,
-        status: error?.status || 'Unknown',
-        fullError: error,
-      });
-      
-      // Show more helpful error message
-      if (errorMessage.includes('recipients address is empty')) {
-        alert(`Email failed to send: ${errorMessage}\n\nSOLUTION: Go to your EmailJS dashboard → Templates → Edit template_le22egb → Set "To Email" field to: marshwoolgar@gmail.com`);
-      } else {
-        alert(`Email failed to send: ${errorMessage}\n\nPlease check:\n1. EmailJS template has recipient email set (marshwoolgar@gmail.com)\n2. Template variables match: {{from_name}}, {{from_email}}, {{message}}\n3. Service ID and Template ID are correct`);
-      }
-      
+    } catch {
+      // EmailJS error occurred - show error state to user
       setSubmitStatus('error');
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } finally {
@@ -75,14 +57,14 @@ const Contact = () => {
     }
   };
 
-  const handleChange = (
+  const handleChange = useCallback((
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
-  };
+    }));
+  }, []);
 
   return (
     <section
@@ -192,9 +174,20 @@ const Contact = () => {
                   <HiPaperAirplane className={`w-5 h-5 ${isSubmitting ? 'animate-pulse' : ''}`} />
                 </motion.button>
                 {submitStatus === 'error' && (
-                  <p className="text-sm text-red-400 text-center mt-2">
-                    Failed to send message. Please try again or email directly.
-                  </p>
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+                    <p className="text-sm text-red-400 text-center">
+                      Failed to send message. Please try again or{' '}
+                      <a
+                        href={`mailto:${personalInfo.email}`}
+                        className="underline hover:text-red-300 transition-colors">
+                        email directly
+                      </a>
+                      .
+                    </p>
+                  </motion.div>
                 )}
               </div>
             </form>

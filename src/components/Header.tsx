@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 
@@ -15,12 +15,13 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,7 +35,7 @@ const Header = () => {
       }
     } else {
       // If we're on a different page, navigate to home with hash
-      window.location.href = `/${href}`;
+      navigate(`/${href}`);
     }
   };
 
@@ -90,7 +91,9 @@ const Header = () => {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
-            aria-label="Toggle menu">
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu">
             {isMobileMenuOpen ? (
               <HiX className="w-6 h-6" />
             ) : (
@@ -104,10 +107,12 @@ const Header = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-gray-900 border-t border-gray-800">
+            className="md:hidden bg-gray-900 border-t border-gray-800"
+            role="menu">
             <ul className="container-custom px-4 py-4 space-y-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
@@ -117,7 +122,8 @@ const Header = () => {
                       e.preventDefault();
                       handleNavClick(link.href);
                     }}
-                    className="block text-gray-300 hover:text-white font-medium transition-colors py-2">
+                    className="block text-gray-300 hover:text-white font-medium transition-colors py-2"
+                    role="menuitem">
                     {link.name}
                   </a>
                 </li>

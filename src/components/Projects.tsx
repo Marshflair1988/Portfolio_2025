@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { HiExternalLink } from 'react-icons/hi';
@@ -7,14 +8,17 @@ import { projects } from '../data/projects';
 const Projects = () => {
   const navigate = useNavigate();
 
-  const handleProjectClick = (projectId: number, e: React.MouseEvent) => {
-    // Don't navigate if clicking on buttons
-    const target = e.target as HTMLElement;
-    if (target.closest('a') || target.closest('button')) {
-      return;
-    }
-    navigate(`/project/${projectId}`);
-  };
+  const handleProjectClick = useCallback(
+    (projectId: number, e: React.MouseEvent) => {
+      // Don't navigate if clicking on buttons
+      const target = e.target as HTMLElement;
+      if (target.closest('a') || target.closest('button')) {
+        return;
+      }
+      navigate(`/project/${projectId}`);
+    },
+    [navigate]
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -75,6 +79,7 @@ const Projects = () => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>

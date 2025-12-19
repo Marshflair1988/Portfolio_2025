@@ -4,22 +4,25 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import ProjectDetail from './components/ProjectDetail';
 import ScrollToTop from './components/ScrollToTop';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/project/:id" element={<ProjectDetail />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/project/:id" element={<ProjectDetail />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

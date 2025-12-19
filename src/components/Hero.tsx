@@ -7,7 +7,7 @@ const Hero = () => {
   const scrollToProjects = () => {
     const element = document.querySelector('#projects');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -76,8 +76,9 @@ const Hero = () => {
                 transition={{ type: 'spring', stiffness: 300 }}>
                 <img
                   src={profileImage}
-                  alt="Profile"
+                  alt={`${personalInfo.name} - ${personalInfo.title}`}
                   className="w-full h-full object-cover"
+                  loading="eager"
                 />
               </motion.div>
               <motion.div

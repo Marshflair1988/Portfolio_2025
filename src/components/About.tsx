@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { HiBriefcase, HiAcademicCap, HiHeart } from 'react-icons/hi';
 import {
+  personalInfo,
   experiences,
   education,
   interests,
@@ -50,6 +51,9 @@ const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto mb-16">
+          <p className="text-lg text-gray-300 leading-relaxed text-center">
+            {personalInfo.bio}
+          </p>
         </motion.div>
 
         {/* Experience, Education, Interests */}
