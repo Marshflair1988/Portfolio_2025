@@ -3,16 +3,16 @@ import ecommerceShoppingCart from '../Assets/images/ecommerce/shoppingcart.png';
 import ecommerceOrderSuccessful from '../Assets/images/ecommerce/ordersuccesful.png';
 import ecommerceContact from '../Assets/images/ecommerce/contact.png';
 import ecommerceEarrings from '../Assets/images/ecommerce/ecommerce-earrings.png';
-import holidazeImage from '../Assets/images/holidaze/holidaze.png';
-import holidazeHomepageFooter from '../Assets/images/holidaze/homepagefooter.png';
-import holidazeConfirmBooking from '../Assets/images/holidaze/confirmbooking.png';
-import holidazeBookingConfirmed from '../Assets/images/holidaze/bookingconfirmed.png';
-import holidazeUserBooking from '../Assets/images/holidaze/userbooking.png';
 import socialImage from '../Assets/images/socialconnect/social.png';
 import socialimagecontainer from '../Assets/images/socialconnect/socialimagecontainer.png';
 import socialstrendingcontainer from '../Assets/images/socialconnect/socialstrendingcontainer.png';
 import socialprofile from '../Assets/images/socialconnect/socialprofile.png';
 import socialnavigation from '../Assets/images/socialconnect/socialnavigation.png';
+import bidhiveHome from '../Assets/images/bidhive/bidhivehome.png';
+import bidhiveAbout from '../Assets/images/bidhive/bidhiveabout.png';
+import bidhiveListings from '../Assets/images/bidhive/bidhivelistings.png';
+import bidhiveProfile from '../Assets/images/bidhive/bidhiveprofile.png';
+import bidhiveProfilePic from '../Assets/images/bidhive/bidhiveprofilepic.png';
 
 export interface Project {
   id: number;
@@ -106,89 +106,115 @@ All code adheres to professional standards including consistent 2-space indentat
     ],
     tags: ['React', 'TypeScript', 'API'],
     liveUrl: 'https://ecommercestore-jsframeworksassignment.netlify.app/',
-    githubUrl: 'https://github.com/Marshflair1988/ecommerce-store',
+    githubUrl:
+      'https://github.com/Marshflair1988/ecommerce-store/blob/main/README.md',
   },
   {
     id: 2,
-    title: 'Holidaze',
+    title: 'BidHive',
     description:
-      'A full-featured accommodation booking platform connecting travelers with unique venues. Built with React and TypeScript.',
+      'A modern, responsive auction house platform for online auctions. Built with HTML, CSS, and JavaScript, featuring real-time bidding and user management.',
     detailedDescription: `Project Purpose
 
-The application serves two distinct user types: customers seeking accommodations and venue managers managing their properties. Customers can browse venues, search by location and dates, view detailed property information, and make bookings. Venue managers have a comprehensive dashboard to create, edit, and delete their venues, manage bookings, and track their business.
+BidHive is a comprehensive auction house web application that provides a platform for users to browse, bid on, and create auction listings. The application serves auction enthusiasts and sellers, enabling them to participate in online auctions with a credit-based bidding system and comprehensive listing management.
 
 Key Features & Technical Highlights
-User Experience
-Intelligent Search System: Home page search bar with city and date filtering that redirects to filtered venue listings
-Real-time Availability: Dynamic calendar integration that automatically excludes booked dates and prevents double-booking
-Responsive Design: Fully responsive UI built with Tailwind CSS, ensuring optimal experience across all devices
-Modal-based Interactions: Seamless user flows through modals for bookings, profile updates, and venue management
+User Authentication
+Secure login and registration system with email validation (@stud.noroff.no requirement)
+Profile management with avatar and banner customization
+Credit system: Users receive 1,000 credits upon registration for bidding
+JWT-based authentication with persistent sessions stored in localStorage
+Protected routes and API endpoints ensuring secure access
 
-Customer Features
-Complete booking lifecycle: create, view, edit, and cancel bookings
-Profile management with avatar updates via image URL integration
-Upcoming bookings dashboard with automatic filtering of past dates
-Advanced venue filtering by location, price, guest capacity, and amenities
+Auction Listings
+Browse active auctions with pagination support
+Featured listings displayed on homepage
+Detailed item views with image galleries
+Real-time bidding system with complete bid history tracking
+Advanced search and filter functionality
+Sort options: newest, ending soon, or most bids
+Filter by active/ended status
 
-Venue Manager Features
-Comprehensive venue management: create, edit, and delete properties
-Booking management dashboard showing all upcoming bookings across owned venues
-Profile customization with avatar and banner updates
-Account deletion functionality with proper data cleanup
+User Dashboard
+View and manage personal listings
+Track bids and auction status across all listings
+Credit balance management and display
+Active bids tracking with real-time updates
+Profile customization: avatar, banner, and bio updates
+
+Responsive Design
+Mobile-first approach ensuring optimal experience
+Fully responsive across all device sizes (mobile, tablet, desktop)
+Modern UI built with Tailwind CSS utility classes
+Accessible mobile navigation menu
+Consistent layout structure across all pages
+
+Error Handling & User Feedback
+Centralized error handling system (errorHandler.js)
+User-friendly error messages with proper HTTP status code handling
+Loading states for all async operations
+Success notifications with auto-dismiss functionality
+Network error detection and recovery mechanisms
+Empty state handling for improved user experience
 
 Technical Architecture
-Built with a modern tech stack emphasizing type safety, performance, and developer experience:
-React 18.2.0 with TypeScript for robust, type-safe component architecture
-Vite 5.0.8 for lightning-fast development and optimized production builds
-React Router DOM 6.20.0 for client-side routing with protected routes
-Tailwind CSS 3.4.0 for utility-first styling with custom design system
-React DatePicker for intuitive date selection with custom validation
+Built with vanilla web technologies emphasizing performance and maintainability:
+HTML5: Semantic markup with accessibility considerations
+CSS3: Tailwind CSS for utility-first styling and responsive design
+JavaScript (ES6+): Modular architecture with ES6 modules
+Font Awesome 6.4.0: Icon library for consistent UI elements
+Noroff API v2: RESTful API for auction data and authentication
+JWT Authentication: Secure token-based authentication system
 
 Technical Challenges Solved
 API Integration Complexity
-Implemented comprehensive REST API client with proper error handling and token management
-Built pagination system to fetch all venues across multiple API pages
-Created flexible API service layer supporting multiple endpoints with consistent error handling
+Implemented comprehensive REST API client with proper error handling
+Built pagination system to fetch all listings across multiple API pages
+Created flexible API service layer (apiClient.js) supporting multiple endpoints
 Implemented Bearer token authentication with localStorage persistence
+Handled CORS and network error scenarios gracefully
 
 State Management & Data Flow
-Managed complex state for bookings, venues, and user profiles across multiple components
-Implemented real-time calendar updates when bookings are created or modified
-Built filtering and search functionality that maintains state through URL parameters
-Created seamless data synchronization between venue details and booking calendars
+Managed complex state for listings, bids, and user profiles across multiple pages
+Implemented real-time bid updates when new bids are placed
+Built filtering and search functionality that maintains state
+Created seamless data synchronization between listing details and bid history
+Handled credit deduction and balance updates in real-time
 
 User Experience Optimization
-Developed date picker validation that prevents booking conflicts
-Implemented automatic filtering to show only future bookings
+Developed bid validation that prevents bidding on own listings
+Implemented automatic filtering to show only active auctions
 Built responsive modal system for various user interactions
-Created intuitive navigation flows between search, browsing, and booking
+Created intuitive navigation flows between browsing, bidding, and profile management
+Optimized image loading and display for better performance
 
 Development Practices
-TypeScript: Full type safety throughout the application with strict TypeScript configuration
-ESLint: Code quality enforcement with TypeScript-specific linting rules
-Performance: Optimized builds with Vite and Lighthouse validation for accessibility and performance
-Code Organization: Modular component structure with separation of concerns (pages, components, services)
+Modular JavaScript: ES6+ modules with clear separation of concerns
+Error Handling: Centralized error handling system for consistent user feedback
+Code Organization: Well-structured file organization (pages, js modules, utils)
+Accessibility: Semantic HTML, ARIA labels, keyboard navigation support
+Performance: Optimized images, efficient DOM manipulation, minimal dependencies
 
 Project Impact
-This project showcases proficiency in building production-ready React applications with complex business logic, real-time data synchronization, and intuitive user interfaces. It demonstrates the ability to work with external APIs, implement authentication flows, manage application state effectively, and create polished user experiences that handle edge cases gracefully.`,
-    image: holidazeImage,
+This project demonstrates proficiency in building production-ready web applications using vanilla JavaScript and modern web standards. It showcases the ability to work with external REST APIs, implement secure authentication flows, manage complex application state, and create polished user experiences that handle edge cases gracefully. The project highlights skills in responsive design, error handling, and creating intuitive user interfaces without relying on modern frameworks.`,
+    image: bidhiveHome,
     gallery: [
-      holidazeImage,
-      holidazeUserBooking,
-      holidazeHomepageFooter,
-      holidazeConfirmBooking,
-      holidazeBookingConfirmed,
+      bidhiveHome,
+      bidhiveListings,
+      bidhiveAbout,
+      bidhiveProfile,
+      bidhiveProfilePic,
     ],
     galleryCaptions: [
-      'Holidaze Homepage',
-      'User Booking Dashboard',
-      'Homepage Footer Section',
-      'Confirm Booking Modal',
-      'Booking Confirmation Page',
+      'BidHive Homepage',
+      'Listings Page',
+      'About Page',
+      'User Profile',
+      'Profile Picture',
     ],
-    tags: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'API'],
+    tags: ['HTML5', 'JavaScript', 'TailwindCSS', 'API'],
     liveUrl: 'https://holidazeprojectexam2.netlify.app/',
-    githubUrl: 'https://github.com/Marshflair1988/Project-Exam-2-Holidaze',
+    githubUrl: 'https://github.com/Marshflair1988/AuctionHouseSemesterProject',
   },
   {
     id: 3,
@@ -270,7 +296,8 @@ This project demonstrates proficiency in modern web development, responsive desi
     ],
     tags: ['HTML5', 'TailwindCSS'],
     liveUrl: 'https://cssframeworksmarsh.netlify.app/profile/',
-    githubUrl: 'https://github.com/Marshflair1988/CSSframeworksCS',
+    githubUrl:
+      'https://github.com/Marshflair1988/CSSframeworksCS/blob/main/README.md',
   },
   {
     id: 4,

@@ -82,6 +82,32 @@ Before you begin, ensure you have the following installed:
 - `npm run preview` - Preview the production build locally
 - `npm run lint` - Run ESLint to check code quality
 
+## Projects
+
+This portfolio showcases the following projects:
+
+### 1. E-Commerce Store
+
+A full-stack e-commerce solution with user authentication, product management, and shopping cart functionality. Built with React, TypeScript, and styled-components.
+
+**Technologies:** React, TypeScript, API
+
+### 2. BidHive
+
+A modern, responsive auction house platform for online auctions. Features real-time bidding, user management, and a credit-based system. Built with HTML, CSS, and JavaScript.
+
+**Technologies:** HTML5, JavaScript, TailwindCSS, API
+
+### 3. Social Connect
+
+A responsive social media web application with authentication, social feed, and user profiles. Built with vanilla HTML, CSS, and JavaScript, styled with Tailwind CSS.
+
+**Technologies:** HTML5, TailwindCSS
+
+### 4. Coming Soon
+
+A project currently under development.
+
 ## Customization
 
 ### Updating Personal Information
@@ -181,4 +207,3 @@ This project is private and personal. All rights reserved.
 - [Framer Motion](https://www.framer.com/motion/) - Animation library
 - [React Icons](https://react-icons.github.io/react-icons/) - Icon library
 - [EmailJS](https://www.emailjs.com/) - Email service
-
