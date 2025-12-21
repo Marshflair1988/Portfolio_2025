@@ -106,8 +106,7 @@ All code adheres to professional standards including consistent 2-space indentat
     ],
     tags: ['React', 'TypeScript', 'API'],
     liveUrl: 'https://ecommercestore-jsframeworksassignment.netlify.app/',
-    githubUrl:
-      'https://github.com/Marshflair1988/ecommerce-store/blob/main/README.md',
+    githubUrl: 'https://github.com/Marshflair1988/ecommerce-store/tree/master',
   },
   {
     id: 2,
@@ -213,7 +212,7 @@ This project demonstrates proficiency in building production-ready web applicati
       'Profile Picture',
     ],
     tags: ['HTML5', 'JavaScript', 'TailwindCSS', 'API'],
-    liveUrl: 'https://holidazeprojectexam2.netlify.app/',
+    liveUrl: 'https://auctionhousebidhive.netlify.app/',
     githubUrl: 'https://github.com/Marshflair1988/AuctionHouseSemesterProject',
   },
   {
